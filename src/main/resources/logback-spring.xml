@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="LOGS" value="./logs" />
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeTags>false</includeTags>
+            <includeMdcKeyName>TRACE_ID</includeMdcKeyName>
+            <fieldNames>
+                <levelValue>[ignore]</levelValue>
+                <thread>THREAD</thread>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+  <root level="INFO">
+    <appender-ref ref="Console" />
+  </root>
+
+</configuration>

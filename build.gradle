@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.bmuschko.docker-spring-boot-application' version '7.4.0'
+}
+
+apply plugin: "java"
+
+
+group = 'com.davefarrelly'
+version = project.hasProperty('BUILD_VERSION') ? project['BUILD_VERSION'] : '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(18))
+    }
+}
+
+ext.setProperty "serviceName", rootProject.name
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+
+    implementation.exclude group: 'org.springframework', module: 'spring-webmvc'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.5'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:3.1.5'
+    implementation 'org.springframework.statemachine:spring-statemachine-starter:3.2.0'
+
+    implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+    implementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+
+    annotationProcessor 'org.projectlombok:lombok'
+}

@@ -1,0 +1,8 @@
+spring:
+  sleuth:
+    baggage:
+      remote-fields:
+        - TRACE_ID
+
+server:
+  port: 8080
