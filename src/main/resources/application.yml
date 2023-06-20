@@ -1,8 +1,20 @@
-spring:
-  sleuth:
+
+management:
+  tracing:
+    enabled: true
     baggage:
-      remote-fields:
-        - TRACE_ID
+      enabled: true
+      correlation:
+        enabled: true
+        fields: TRACE_ID
+      remote-fields: TRACE_ID
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
 
 server:
   port: 8080
+spring:
+  application:
+    name: statemachine-with-micrometer

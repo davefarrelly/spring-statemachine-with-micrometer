@@ -1,6 +1,5 @@
 package com.davefarrelly.baggage;
 
-import brave.baggage.BaggageField;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.statemachine.StateMachine;
@@ -17,16 +16,12 @@ import java.util.UUID;
 @RequestMapping(path = "/statemachine/")
 public class BaggageController {
 
-  private final BaggageField traceIdField;
   private final StateMachineFactory<String, String> stateMachineFactory;
 
   @PostMapping("start")
   public Mono<Void> getCommitStatus() {
 
     log.info("Starting state machine");
-
-    UUID uuid = UUID.randomUUID();
-    traceIdField.updateValue(uuid.toString());
 
     StateMachine<String, String> sm = stateMachineFactory.getStateMachine();
 

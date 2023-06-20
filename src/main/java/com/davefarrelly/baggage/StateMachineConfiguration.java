@@ -15,22 +15,26 @@ import org.springframework.statemachine.state.State;
 @Slf4j
 public class StateMachineConfiguration extends StateMachineConfigurerAdapter<String, String> {
 
+    private static final String START = "START";
+    private static final String MIDDLE = "MIDDLE";
+    private static final String END = "END";
+
     @Override
     public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
         states.withStates()
-                .initial("START")
-                .state("MIDDLE")
-                .end("END");
+                .initial(START)
+                .state(MIDDLE)
+                .end(END);
     }
 
     @Override
     public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
         transitions.withExternal()
-                .source("START")
-                .target("MIDDLE")
+                .source(START)
+                .target(MIDDLE)
                 .and().withExternal()
-                .source("MIDDLE")
-                .target("END");
+                .source(MIDDLE)
+                .target(END);
     }
 
     @Override
