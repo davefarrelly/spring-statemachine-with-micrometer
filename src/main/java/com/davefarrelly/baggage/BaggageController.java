@@ -15,16 +15,17 @@ import reactor.core.publisher.Mono;
 @RequestMapping(path = "/statemachine/")
 public class BaggageController {
 
-  private final StateMachineFactory<String, String> stateMachineFactory;
+    private final StateMachineFactory<String, String> stateMachineFactory;
 
-  @PostMapping("start")
-  public Mono<Void> getCommitStatus() {
+    @PostMapping("start")
+    public Mono<Void> start() {
 
-    log.info("Starting state machine");
+        log.info("Starting state machine");
 
-    StateMachine<String, String> sm = stateMachineFactory.getStateMachine();
+        StateMachine<String, String> sm = stateMachineFactory.getStateMachine();
+        sm.startReactively().subscribe();
 
-    return sm.startReactively();
-  }
+        return Mono.empty();
+    }
 
 }
