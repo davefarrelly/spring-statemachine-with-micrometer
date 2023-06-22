@@ -37,14 +37,15 @@ public class StateMachineConfiguration extends StateMachineConfigurerAdapter<Str
 
     public Action<String, String> startAction() {
         return context -> {
-            log.info("Action called!");
+            log.info("Start ction called!");
             Message<String> stateEvent = MessageBuilder.withPayload(FIRST).build();
             context.getStateMachine().sendEvent(Mono.just(stateEvent)).subscribe();
         };
     }
+
     public Action<String, String> firstAction() {
         return context -> {
-            log.info("Action called!");
+            log.info("First action called!");
             Message<String> stateEvent = MessageBuilder.withPayload(SECOND).build();
             context.getStateMachine().sendEvent(Mono.just(stateEvent)).subscribe();
         };
@@ -52,7 +53,7 @@ public class StateMachineConfiguration extends StateMachineConfigurerAdapter<Str
 
     public Action<String, String> secondAction() {
         return context -> {
-            log.info("Action called!");
+            log.info("Second action called!");
             Message<String> stateEvent = MessageBuilder.withPayload(THIRD).build();
             context.getStateMachine().sendEvent(Mono.just(stateEvent)).subscribe();
         };
@@ -60,7 +61,7 @@ public class StateMachineConfiguration extends StateMachineConfigurerAdapter<Str
 
     public Action<String, String> thirdAction() {
         return context -> {
-            log.info("Action called!");
+            log.info("Third action called!");
             Message<String> stateEvent = MessageBuilder.withPayload(END).build();
             context.getStateMachine().sendEvent(Mono.just(stateEvent)).subscribe();
         };
