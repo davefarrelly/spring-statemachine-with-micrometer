@@ -37,7 +37,7 @@ public class StateMachineConfiguration extends StateMachineConfigurerAdapter<Str
 
     public Action<String, String> startAction() {
         return context -> {
-            log.info("Start ction called!");
+            log.info("Start action called!");
             Message<String> stateEvent = MessageBuilder.withPayload(FIRST).build();
             context.getStateMachine().sendEvent(Mono.just(stateEvent)).subscribe();
         };
